@@ -38,12 +38,19 @@ public class NtxuvaTest {
     @Test
     public void testMoveOnXSide() {
 
+        System.out.println("move x");
         Ntxuva ntxuva = new Ntxuva();
-        ntxuva.move(new Position(1, 0));
-        String out = "Turn: x\n";
+        ntxuva = ntxuva.move(new Position(1, 0));
+        System.out.println("se fini");
+        String out = "Turn: o\n";
         out += "0 3 3 0 3 3 \n1 4 1 3 3 0 \n2 2 0 2 2 2 \n2 2 0 2 2 2 \n";
         assertEquals(out, ntxuva.toString());
+        
     }
+    
+    
+    
+    
 
     @Test
     public void testHasMoreThanOnePiece() {
@@ -80,7 +87,7 @@ public class NtxuvaTest {
     public void testMoveOnOSide() {
 
         Ntxuva ntxuva = new Ntxuva();
-        ntxuva.move(new Position(1, 0)).move(new Position(2, 0));
+        ntxuva = ntxuva.move(new Position(1, 0)).move(new Position(2, 0));
         String out = "Turn: x\n";
         out += "0 3 3 0 3 3 \n1 4 1 3 3 0 \n1 0 1 3 0 3 \n4 1 1 3 0 3 \n";
         assertEquals(out, ntxuva.toString());

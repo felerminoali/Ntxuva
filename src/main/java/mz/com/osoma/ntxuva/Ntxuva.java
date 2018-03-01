@@ -135,8 +135,12 @@ public class Ntxuva {
 
         Position current = new Position(start.row, start.column);
 
-        int[][] newBoard = board.clone();
         
+        int[][] newBoard = new int[ROWS][COLUMNS];
+        for (int i = 0; i < ROWS; i++) {
+            System.arraycopy(board[i], 0, newBoard[i], 0, COLUMNS);
+        }
+
         if (newBoard[current.row][current.column] > 0) {
 
             int tempStones = 0;
