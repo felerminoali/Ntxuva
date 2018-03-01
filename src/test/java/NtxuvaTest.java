@@ -47,10 +47,6 @@ public class NtxuvaTest {
         assertEquals(out, ntxuva.toString());
         
     }
-    
-    
-    
-    
 
     @Test
     public void testHasMoreThanOnePiece() {

@@ -134,7 +134,6 @@ public class Game {
 
                             JOptionPane.showMessageDialog(null, message.toString());
                         }
-
                     });
 
                     buttons[i][j] = btn;
