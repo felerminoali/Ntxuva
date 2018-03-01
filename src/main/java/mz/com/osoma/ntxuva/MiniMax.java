@@ -147,5 +147,11 @@ public class MiniMax {
     return (semEspaco (tab));
   }
   
+  
+  public ArrayList<Sucessor> gerar_sucessores (int[][] tab, int v)
+  {
+  
+  }
+  
 
 }
