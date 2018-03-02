@@ -104,8 +104,8 @@ public class Ntxuva {
         int finishRow = (pTurn == 'o') ? ROW_TWO : ROWS;
         for (int i = startRow; i < finishRow; i++) {
             for (int j = 0; j < COLUMNS; j++) {
+                System.out.println(board[i][j]);
                 if (board[i][j] > 1) {
-                    System.out.println("entrei");
                     return true;
                 }
             }

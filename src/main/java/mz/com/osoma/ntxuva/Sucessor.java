@@ -14,7 +14,10 @@ public class Sucessor {
     int[][] tabuleiro;
     int utilidade;
 
-    public Sucessor() {
+    public Sucessor(int[][] tab) {
+        
+        
+        
     }
 
 }
