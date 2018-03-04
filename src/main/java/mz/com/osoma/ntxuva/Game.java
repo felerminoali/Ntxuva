@@ -17,20 +17,24 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 /**
+ * -+
  *
  * @author feler
  */
 public class Game {
 
-    public Ntxuva ntxuva = new Ntxuva();
-
-//    public Ntxuva ntxuva = new Ntxuva(new String[]{"000001", "001000", "110000", "000200"}, 'x');
+//    public Ntxuva ntxuva = new Ntxuva();
+    
+        public Ntxuva ntxuva = new Ntxuva(new String[]{"100000", "010000", "001010", "000000"}, 'x');
+//    public Ntxuva ntxuva = new Ntxuva(new String[]{"100000", "010000", "001010", "000000"}, 'x');
+//    public Ntxuva ntxuva = new Ntxuva(new String[]{"100201", "010000", "001010", "003002"}, 'x');
 //    public Ntxuva ntxuva = new Ntxuva(new String[]{"000001", "001000", "110000", "000200"}, 'x');
 //    public Ntxuva ntxuva = new Ntxuva(new String[]{"100000", "000000", "001000", "000001"}, 'x');
 //    public Ntxuva ntxuva = new Ntxuva(new String[]{"000000", "100000", "000000", "000001"}, 'x');
 //    public Ntxuva ntxuva = new Ntxuva(new String[] {"000100", "100000", "001010", "000000"}, 'x');
-    
-    
+
+    final static JButton[][] buttons = new JButton[Ntxuva.ROWS][Ntxuva.COLUMNS];
+
     public static void main(String[] args) {
 
         SwingUtilities.invokeLater(() -> {
@@ -39,7 +43,6 @@ public class Game {
             frame.setLayout(new GridLayout(Ntxuva.ROWS, Ntxuva.COLUMNS));
 
             final Game game = new Game();
-            final JButton[][] buttons = new JButton[Ntxuva.ROWS][Ntxuva.COLUMNS];
 
             for (int i = 0; i < Ntxuva.ROWS; i++) {
                 for (int j = 0; j < Ntxuva.COLUMNS; j++) {
@@ -48,8 +51,8 @@ public class Game {
 
                     if (game.ntxuva.turn == 'x') {
 
-                        if (i == 1) {
-//                        if (i < 2) {
+//                        if (i == 1) {
+                        if (i < 2) {
                             btn.setBackground(Color.CYAN);
                             btn.setEnabled(true);
                         } else {
@@ -85,53 +88,38 @@ public class Game {
                         String[] split = comando.split("_");
 
                         System.out.println("X play " + new Position(Integer.parseInt(split[1]), Integer.parseInt(split[2])));
+
+                        Position posClick = new Position(Integer.parseInt(split[1]), Integer.parseInt(split[2]));
+
+//                        if (game.ntxuva.board[posClick.row][posClick.column] > 0) {
+
+                        System.out.println("before turn "+game.ntxuva.turn);
                         game.ntxuva = game.ntxuva.move(new Position(Integer.parseInt(split[1]), Integer.parseInt(split[2])));
+                        System.out.println("after turn "+game.ntxuva.turn);
+                        
+                        updateBoard(game.ntxuva);
 
-                        for (int k = 0; k < Ntxuva.ROWS; k++) {
-                            for (int l = 0; l < Ntxuva.COLUMNS; l++) {
-                                String stones = "";
-                                for (int m = 0; m < game.ntxuva.board[k][l]; m++) {
-                                    stones += "o";
-                                }
-                                buttons[k][l].setText(stones);
-
-                                if (game.ntxuva.turn == 'x') {
-                                    if (k < 2) {
-                                        buttons[k][l].setBackground(Color.CYAN);
-                                        buttons[k][l].setEnabled(true);
-                                    } else {
-
-                                        buttons[k][l].setBackground(Color.WHITE);
-                                        buttons[k][l].setEnabled(false);
-                                    }
-                                } else {
-                                    if (k < 2) {
-                                        buttons[k][l].setBackground(Color.WHITE);
-                                        buttons[k][l].setEnabled(false);
-                                    } else {
-                                        buttons[k][l].setBackground(Color.CYAN);
-                                        buttons[k][l].setEnabled(true);
-                                    }
-                                }
-                            }
-                        }
-
-                        if (!game.ntxuva.gameEnd()) {
+                        if (!game.ntxuva.gameEnd() && game.ntxuva.turn == 'o') {
                             // find the best move
                             // move the mest move
+
+                            Position bestMove = new MiniMax().decisao_minimax(game.ntxuva);
+//                            JOptionPane.showMessageDialog(null, bestMove.toString());
+                            game.ntxuva = game.ntxuva.move(bestMove);
+                            updateBoard(game.ntxuva);
                         }
+//                        }
 
                         StringBuilder message = new StringBuilder();
                         if (game.ntxuva.gameEnd()) {
 
-                            if (game.ntxuva.win('x')) {
-                                message.append("You Won");
-                            } else if (game.ntxuva.win('o')) {
-                                message.append("The computer Won");
-                            } else {
-                                message.append("Its a draw");
-                            }
+                            int u = new MiniMax().utilidade(game.ntxuva);
 
+                            if (u < 0) {
+                                message.append("You Won");
+                            } else {
+                                message.append("The computer Won");
+                            }
                             JOptionPane.showMessageDialog(null, message.toString());
                         }
                     });
@@ -146,6 +134,37 @@ public class Game {
             frame.setVisible(true);
         });
 
+    }
+
+    public static void updateBoard(Ntxuva ntxuva) {
+        for (int k = 0; k < Ntxuva.ROWS; k++) {
+            for (int l = 0; l < Ntxuva.COLUMNS; l++) {
+                String stones = "";
+                for (int m = 0; m < ntxuva.board[k][l]; m++) {
+                    stones += "o";
+                }
+                buttons[k][l].setText(stones);
+
+//                if (ntxuva.turn == 'x') {
+//                    if (k < 2) {
+//                        buttons[k][l].setBackground(Color.CYAN);
+//                        buttons[k][l].setEnabled(true);
+//                    } else {
+//
+//                        buttons[k][l].setBackground(Color.WHITE);
+//                        buttons[k][l].setEnabled(false);
+//                    }
+//                } else {
+//                    if (k < 2) {
+//                        buttons[k][l].setBackground(Color.WHITE);
+//                        buttons[k][l].setEnabled(false);
+//                    } else {
+//                        buttons[k][l].setBackground(Color.CYAN);
+//                        buttons[k][l].setEnabled(true);
+//                    }
+//                }
+            }
+        }
     }
 
 }

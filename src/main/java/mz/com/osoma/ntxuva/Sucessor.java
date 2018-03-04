@@ -11,13 +11,19 @@ package mz.com.osoma.ntxuva;
  */
 public class Sucessor {
 
-    int[][] tabuleiro;
+    Ntxuva tabuleiro;
     int utilidade;
+    Position position;
+    
 
-    public Sucessor(int[][] tab) {
-        
-        
-        
+    public Sucessor(Ntxuva ntxuva, Position position) {
+        this.tabuleiro = new Ntxuva(ntxuva);
+        this.position = position;
+    }
+    
+    @Override
+    public String toString(){
+        return "\n"+tabuleiro.toString()+"position"+position.toString()+"\nutilidade"+utilidade+"\n";
     }
 
 }

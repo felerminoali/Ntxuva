@@ -76,6 +76,13 @@ public class Ntxuva {
         this.turn = t;
     }
 
+    Ntxuva(Ntxuva ntxuva) {
+        
+        this.board = ntxuva.board;
+        this.turn = ntxuva.turn;
+      
+    }
+
     public final void reset(int pieces) {
 
         this.turn = 'x';
@@ -101,10 +108,10 @@ public class Ntxuva {
     public boolean moreThanOnePiece(char pTurn) {
 
         int startRow = (pTurn == 'x') ? ROW_ZERO : ROW_TWO;
-        int finishRow = (pTurn == 'o') ? ROW_TWO : ROWS;
+        int finishRow = (pTurn == 'x') ? ROW_TWO : ROWS;
+         
         for (int i = startRow; i < finishRow; i++) {
             for (int j = 0; j < COLUMNS; j++) {
-                System.out.println(board[i][j]);
                 if (board[i][j] > 1) {
                     return true;
                 }
@@ -240,30 +247,30 @@ public class Ntxuva {
     public boolean win(char pTurn) {
 
         
-        if (sumPieces('x') == 1) {
-            
-            if(sumPieces('o') == 1){
-            
-            Position pX = getLastPiece('x');
-            Position pO = getLastPiece('o');
-
-            if (pTurn == 'o') {
-
-                if (pO.column <= pX.column) {
-                    return !pX.isAttackingPosition() && pO.isAttackingPosition();
-                } else {
-                    return !(pX.isAttackingPosition() && !pO.isAttackingPosition());
-                }
-            } else {
-                if (pO.column < pX.column) {
-                    return false;
-                } else if (pO.column == pX.column) {
-                    return true;
-                }
-                return false;
-            }
-        }
-        }
+//        if (sumPieces('x') == 1) {
+//            
+//            if(sumPieces('o') == 1){
+//            
+//            Position pX = getLastPiece('x');
+//            Position pO = getLastPiece('o');
+//
+//            if (pTurn == 'o') {
+//
+//                if (pO.column <= pX.column) {
+//                    return !pX.isAttackingPosition() && pO.isAttackingPosition();
+//                } else {
+//                    return !(pX.isAttackingPosition() && !pO.isAttackingPosition());
+//                }
+//            } else {
+//                if (pO.column < pX.column) {
+//                    return false;
+//                } else if (pO.column == pX.column) {
+//                    return true;
+//                }
+//                return false;
+//            }
+//        }
+//        }
 
         int startRow = (pTurn == 'x') ? ROW_TWO : ROW_ZERO;
         int finishRow = (pTurn == 'x') ? ROWS : ROW_TWO;
