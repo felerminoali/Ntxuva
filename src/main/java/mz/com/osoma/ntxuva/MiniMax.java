@@ -65,9 +65,8 @@ public class MiniMax {
         /*
      * Percorre os nos sucessores de MAX
          */
-        
         for (Sucessor s : possibleMoves(ntxuva, 'o')) {
-            
+
             v = Math.max(v, valor_min(s.tabuleiro, alfa, beta, prof));
             s.utilidade = v;
 
@@ -179,9 +178,14 @@ public class MiniMax {
             for (int i = startRow; i < finishRow; i++) {
                 for (int j = 0; j < Ntxuva.COLUMNS; j++) {
                     if (ntxuva.board[i][j] != 0) {
-                        Position p = new Position(i, j);
-                        Ntxuva move = ntxuva.move(p);
-                        suc.add(new Sucessor(move, p));
+                        
+                        Position next = new Position(i, j).moveForward();
+                        if (ntxuva.board[next.row][next.column] == 0) {
+                            Position p = new Position(i, j);
+                            Ntxuva move = ntxuva.move(p);
+                            suc.add(new Sucessor(move, p));
+                        }
+
                     }
                 }
             }

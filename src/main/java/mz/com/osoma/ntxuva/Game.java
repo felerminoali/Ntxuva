@@ -25,7 +25,7 @@ public class Game {
 
 //    public Ntxuva ntxuva = new Ntxuva();
     
-        public Ntxuva ntxuva = new Ntxuva(new String[]{"100000", "010000", "001010", "000000"}, 'x');
+        public Ntxuva ntxuva = new Ntxuva(new String[]{"101001", "010000", "011110", "101000"}, 'x');
 //    public Ntxuva ntxuva = new Ntxuva(new String[]{"100000", "010000", "001010", "000000"}, 'x');
 //    public Ntxuva ntxuva = new Ntxuva(new String[]{"100201", "010000", "001010", "003002"}, 'x');
 //    public Ntxuva ntxuva = new Ntxuva(new String[]{"000001", "001000", "110000", "000200"}, 'x');
@@ -103,7 +103,11 @@ public class Game {
                             // find the best move
                             // move the mest move
 
+                            System.out.println("entrei");
+                            
+                            
                             Position bestMove = new MiniMax().decisao_minimax(game.ntxuva);
+                            System.out.println("best: "+bestMove);
 //                            JOptionPane.showMessageDialog(null, bestMove.toString());
                             game.ntxuva = game.ntxuva.move(bestMove);
                             updateBoard(game.ntxuva);

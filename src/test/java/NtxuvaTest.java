@@ -47,8 +47,9 @@ public class NtxuvaTest {
         String out = "Turn: o\n";
         out += "0 3 3 0 3 3 \n1 4 1 3 3 0 \n2 2 0 2 2 2 \n2 2 0 2 2 2 \n";
         assertEquals(out, ntxuva.toString());
-        
+
     }
+
     @Test
     public void testHasMoreThanOnePiece() {
         Ntxuva ntxuva = new Ntxuva(1);
@@ -90,42 +91,6 @@ public class NtxuvaTest {
     @Test
     public void testWin() {
 
-        String[] s = {"000000", "000000", "222222", "122222"};
-        Ntxuva ntxuva = new Ntxuva(s);
-        assertTrue(ntxuva.win('o'));
-
-        String[] str = {"222222", "222222", "000000", "000000"};
-        ntxuva = new Ntxuva(str);
-        assertTrue(ntxuva.win('x'));
-
-        String[] str1 = {"000010", "000000", "000010", "000000"};
-        ntxuva = new Ntxuva(str1);
-        assertTrue(ntxuva.win('o'));
-
-        String[] str2 = {"000000", "000010", "000000", "000001"};
-        ntxuva = new Ntxuva(str2);
-        assertFalse(ntxuva.win('o'));
-
-        String[] str3 = {"000001", "000000", "010000", "000000"};
-        ntxuva = new Ntxuva(str3);
-        assertFalse(ntxuva.win('x'));
-
-        String[] str4 = {"000100", "000000", "000010", "000000"};
-        ntxuva = new Ntxuva(str4);
-        assertFalse(ntxuva.win('x'));
-
-        String[] str5 = {"000000", "000100", "000000", "000010"};
-        ntxuva = new Ntxuva(str5);
-        assertFalse(ntxuva.win('x'));
-
-        String[] str6 = {"000000", "000001", "000000", "000001"};
-        ntxuva = new Ntxuva(str6);
-        assertTrue(ntxuva.win('x'));
-
-        String[] str7 = {"000001", "000000", "000001", "000000"};
-        ntxuva = new Ntxuva(str7);
-        assertTrue(ntxuva.win('x'));
-
     }
 
     @Test
@@ -144,8 +109,7 @@ public class NtxuvaTest {
         assertEquals(5, ntxuva1.sumPieces('o'));
 
     }
-    
-    
+
     @Test
     public void testPossibleMoves() {
 
@@ -153,19 +117,26 @@ public class NtxuvaTest {
         Ntxuva ntxuva = new Ntxuva(s);
 
         ArrayList<Sucessor> posibleMoves1 = new MiniMax().possibleMoves(ntxuva, 'o');
-        
+
 //        System.out.println(posibleMoves1);
+    }
+
+    @Test
+    public void testMiniMaxDecision() {
+
+        String[] s = {"100000", "010000", "001010", "000000"};
+        Ntxuva ntxuva = new Ntxuva(s, 'o');
+        Position p = new MiniMax().decisao_minimax(ntxuva);
+        assertEquals("[2, 2]", p.toString());
 
     }
-    
+
     @Test
-    public void testMiniMaxDecision(){
-        
-        String[] s = {"100000", "010000", "001010", "000000"};
-        Ntxuva ntxuva = new Ntxuva(s,'o');
-        Position p = new MiniMax().decisao_minimax(ntxuva);
-        System.out.println("Best move: "+p);
-    
+    public void testNextMove() {
+
+        Position p = new Position(0, 0).moveForward();
+        assertEquals("[1, 0]", p.toString());
+
     }
 
 }
