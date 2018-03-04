@@ -11,7 +11,7 @@ package mz.com.osoma.ntxuva;
  */
 public class Ntxuva {
 
-    static final int COLUMNS = 8;
+    static final int COLUMNS = 6;
     static final int ROWS = 4;
     static final int ROW_ZERO = 0;
     static final int ROW_ONE = 1;

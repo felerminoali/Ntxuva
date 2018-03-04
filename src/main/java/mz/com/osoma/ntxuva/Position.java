@@ -127,6 +127,22 @@ public class Position {
         return id;
     }
 
+    public Position getPositonById(int id, char turn) {
+
+        int max = Ntxuva.COLUMNS * 2;
+
+        Position p = (turn == 'o') ? new Position(3, 0) : new Position(1, 0);
+
+        for (int i = 0; i < max; i++) {
+            if (id == i) {
+                return p;
+            }
+            p.moveClockWise();
+        }
+
+        return p;
+    }
+
     @Override
     public String toString() {
         return "[" + this.row + ", " + this.column + "]";

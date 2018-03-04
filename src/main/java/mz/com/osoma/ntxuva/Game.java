@@ -23,14 +23,14 @@ import javax.swing.SwingUtilities;
  */
 public class Game {
 
-//    public Ntxuva ntxuva = new Ntxuva();
+    public Ntxuva ntxuva = new Ntxuva();
     
-        public Ntxuva ntxuva = new Ntxuva(new int[][]{
-            {1,2,1,0,1,4,3,1},
-            {10,0,3,0,1,0,1,0},
-            {0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0},
-        },'x');
+//        public Ntxuva ntxuva = new Ntxuva(new int[][]{
+//            {1,2,1,0,1,4,3,1},
+//            {10,0,3,0,1,0,1,0},
+//            {0,0,0,0,0,0,0,0},
+//            {0,0,0,0,0,0,0,0},
+//        },'x');
 //    public Ntxuva ntxuva = new Ntxuva(new String[]{"100000", "010000", "001010", "000000"}, 'x');
 //    public Ntxuva ntxuva = new Ntxuva(new String[]{"100201", "010000", "001010", "003002"}, 'x');
 //    public Ntxuva ntxuva = new Ntxuva(new String[]{"000001", "001000", "110000", "000200"}, 'x');

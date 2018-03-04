@@ -167,10 +167,13 @@ public class MiniMax {
             for (int i = startRow; i < finishRow; i++) {
                 for (int j = 0; j < Ntxuva.COLUMNS; j++) {
                     if (ntxuva.board[i][j] > 1) {
-                        Position p = new Position(i, j);
 
-                        Ntxuva move = ntxuva.move(p);
-                        suc.add(new Sucessor(move, p));
+                        if (!mayerTest(ntxuva, turn)) {
+                            Position p = new Position(i, j);
+                            Ntxuva move = ntxuva.move(p);
+                            suc.add(new Sucessor(move, p));
+                        }
+
                     }
                 }
             }
@@ -181,11 +184,12 @@ public class MiniMax {
 
                         Position next = new Position(i, j).moveAntiClockWise();
                         if (ntxuva.board[next.row][next.column] == 0) {
-                            Position p = new Position(i, j);
-                            Ntxuva move = ntxuva.move(p);
-                            suc.add(new Sucessor(move, p));
+                            if (!mayerTest(ntxuva, turn)) {
+                                Position p = new Position(i, j);
+                                Ntxuva move = ntxuva.move(p);
+                                suc.add(new Sucessor(move, p));
+                            }
                         }
-
                     }
                 }
             }
@@ -193,59 +197,123 @@ public class MiniMax {
         return suc;
     }
 
+    public boolean mayerTest(Ntxuva ntxuva, char turn) {
+
+        return isMayerTestA(ntxuva, turn)
+                && isMayerTestB(ntxuva, turn)
+                && isMayerTestC(ntxuva, turn)
+                && isMayerTestD(ntxuva, turn);
+
+    }
+
     public boolean isMayerTestA(Ntxuva ntxuva, char turn) {
-        
+
         int startRow = (turn == 'x') ? Ntxuva.ROW_ZERO : Ntxuva.ROW_TWO;
         int finishRow = (turn == 'x') ? Ntxuva.ROW_TWO : Ntxuva.ROWS;
 
         boolean result = true;
         for (int i = startRow; i < finishRow; i++) {
-            for (int j = 0; j < Ntxuva.COLUMNS; j++) {
-                
+            for (int j = 0; j < Ntxuva.COLUMNS; j++) { 
+
                 int seedsInHole = ntxuva.board[i][j];
-                Position p = new Position(i,j);
-                
+                Position p = new Position(i, j);
+
                 /* 
                   Mayer Test A:
                     Number of seed in hole(i) != i + 1
-                */
-                
-                System.out.println(seedsInHole+"!="+(p.getPositionId()+1));
-                result = result && (seedsInHole != (p.getPositionId()+1));
-//                if(!result) return result;
+                 */
+//                System.out.println(seedsInHole + "!=" + (p.getPositionId() + 1));
+                result = result && (seedsInHole != (p.getPositionId() + 1));
+                if(!result) return result;
             }
         }
-        
+
         return result;
     }
-    
-    
-     public boolean isMayerTestB(Ntxuva ntxuva, char turn) {
-        
+
+    public boolean isMayerTestB(Ntxuva ntxuva, char turn) {
+
         int startRow = (turn == 'x') ? Ntxuva.ROW_ZERO : Ntxuva.ROW_TWO;
         int finishRow = (turn == 'x') ? Ntxuva.ROW_TWO : Ntxuva.ROWS;
-        
-         System.out.println("");
+
+        System.out.println("");
         boolean result = true;
         for (int i = startRow; i < finishRow; i++) {
             for (int j = 0; j < Ntxuva.COLUMNS; j++) {
-                
+
                 int seedsInHole = ntxuva.board[i][j];
-                Position p = new Position(i,j);
-                
+                Position p = new Position(i, j);
+
                 /* 
-                  Mayer Test A:
-                    Number of seed in hole(i) != i + 1
-                */
-                
-                System.out.println(seedsInHole+"!="+(p.getPositionId()-1));
-                result = result && (seedsInHole != (p.getPositionId()-1));
-//                if(!result) return result;
+                  Mayer Test B:
+                    Number of seed in hole(i) != i - 1
+                 */
+//                System.out.println(seedsInHole + "!=" + (p.getPositionId() - 1));
+                result = result && (seedsInHole != (p.getPositionId() - 1));
+                if(!result) return result;
             }
         }
-        
+
         return result;
     }
-    
-    
+
+    public boolean isMayerTestC(Ntxuva ntxuva, char turn) {
+
+        boolean result = true;
+        /* 
+                  Mayer Test C:
+                   y(i+j) != y(i)+j+1
+         */
+
+        for (int i = 0; i < Ntxuva.COLUMNS * 2; i++) {
+            for (int j = 0; j < Ntxuva.COLUMNS * 2; j++) {
+                int k = i + j;
+
+                if (k < Ntxuva.COLUMNS * 2) {
+                    Position pk = new Position().getPositonById(k, turn);
+                    Position pi = new Position().getPositonById(i, turn);
+
+                    int seedsPosK = ntxuva.board[pk.row][pk.column];
+                    int seedsPosI = ntxuva.board[pi.row][pi.column];
+
+//                    System.out.println("i: " + i + " j: " + j + " => " + seedsPosK + "!=" + ((seedsPosI) + j + 1));
+                    result = result && (seedsPosK != ((seedsPosI) + j + 1));
+                    if(!result) return result;
+                }
+
+            }
+        }
+
+        return result;
+    }
+
+    public boolean isMayerTestD(Ntxuva ntxuva, char turn) {
+
+        boolean result = true;
+        /* 
+                  Mayer Test C:
+                   y(i+j) != y(i)+j+1
+         */
+
+        for (int i = 0; i < Ntxuva.COLUMNS * 2; i++) {
+            for (int j = 0; j < Ntxuva.COLUMNS * 2; j++) {
+                int k = i + j;
+
+                if (k < Ntxuva.COLUMNS * 2) {
+                    Position pk = new Position().getPositonById(k, turn);
+                    Position pi = new Position().getPositonById(i, turn);
+
+                    int seedsPosK = ntxuva.board[pk.row][pk.column];
+                    int seedsPosI = ntxuva.board[pi.row][pi.column];
+
+//                    System.out.println("i: " + i + " j: " + j + " => " + seedsPosK + "!=" + ((seedsPosI) + j - 1));
+                    result = result && (seedsPosK != ((seedsPosI) + j - 1));
+                    if(!result) return result;
+                }
+
+            }
+        }
+
+        return result;
+    }
 }

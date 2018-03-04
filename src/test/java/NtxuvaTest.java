@@ -149,43 +149,71 @@ public class NtxuvaTest {
 //        
 //        
 //    }
-    @Test
-    public void testPositionId() {
-
-        assertEquals(1, new Position(0, 0).getPositionId());
-        assertEquals(2, new Position(0, 1).getPositionId());
-        assertEquals(3, new Position(0, 2).getPositionId());
-        assertEquals(6, new Position(2, 5).getPositionId());
-
-    }
-
-    @Test
-    public void testMayersA() {
-
-        int[][] b = {
-            {1,2,1,0,1,4,3,1},
-            {10,0,3,0,1,0,1,0},
-            {0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0},
-        };
-        Ntxuva ntxuva = new Ntxuva(b,'x');
-        
-        assertTrue(new MiniMax().isMayerTestA(ntxuva, 'x'));
-    }
-
-    
-     @Test
-    public void testMayersB() {
-
-        
-        int[][] b = {
-            {1,2,1,0,1,4,3,1},
-            {10,0,3,0,1,0,1,0},
-            {0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0},
-        };
-        Ntxuva ntxuva = new Ntxuva(b,'x');
-        
-        assertTrue(new MiniMax().isMayerTestB(ntxuva, 'x'));
-    }
+//    @Test
+//    public void testPositionId() {
+//
+//        assertEquals(1, new Position(0, 0).getPositionId());
+//        assertEquals(2, new Position(0, 1).getPositionId());
+//        assertEquals(3, new Position(0, 2).getPositionId());
+//        assertEquals(6, new Position(2, 5).getPositionId());
+//
+//    }
+//
+//    @Test
+//    public void testMayersA() {
+//
+//        int[][] b = {
+//            {1,2,1,0,1,4,3,1},
+//            {10,0,3,0,1,0,1,0},
+//            {0,0,0,0,0,0,0,0},
+//            {0,0,0,0,0,0,0,0},
+//        };
+//        Ntxuva ntxuva = new Ntxuva(b,'x');
+//        
+//        assertTrue(new MiniMax().isMayerTestA(ntxuva, 'x'));
+//    }
+//
+//    
+//     @Test
+//    public void testMayersB() {
+//
+//        
+//        int[][] b = {
+//            {1,2,1,0,1,4,3,1},
+//            {10,0,3,0,1,0,1,0},
+//            {0,0,0,0,0,0,0,0},
+//            {0,0,0,0,0,0,0,0},
+//        };
+//        Ntxuva ntxuva = new Ntxuva(b,'x');
+//        assertTrue(new MiniMax().isMayerTestB(ntxuva, 'x'));
+//    }
+//    
+//    @Test
+//    public void testMayersC() {
+//
+//        
+//        int[][] b = {
+//            {1,2,1,0,1,4,3,1},
+//            {10,0,3,0,1,0,1,0},
+//            {0,0,0,0,0,0,0,0},
+//            {0,0,0,0,0,0,0,0},
+//        };
+//        Ntxuva ntxuva = new Ntxuva(b,'x');
+//        assertTrue(new MiniMax().isMayerTestC(ntxuva, 'x'));
+//    }
+//    
+//    
+//    @Test
+//    public void testMayersD() {
+//
+//        
+//        int[][] b = {
+//            {1,2,1,0,1,4,3,1},
+//            {10,0,3,0,1,0,1,0},
+//            {0,0,0,0,0,0,0,0},
+//            {0,0,0,0,0,0,0,0},
+//        };
+//        Ntxuva ntxuva = new Ntxuva(b,'x');
+//        assertTrue(new MiniMax().isMayerTestD(ntxuva, 'x'));
+//    }
 }
