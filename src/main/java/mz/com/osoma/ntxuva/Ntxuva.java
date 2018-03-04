@@ -11,7 +11,7 @@ package mz.com.osoma.ntxuva;
  */
 public class Ntxuva {
 
-    static final int COLUMNS = 6;
+    static final int COLUMNS = 8;
     static final int ROWS = 4;
     static final int ROW_ZERO = 0;
     static final int ROW_ONE = 1;
@@ -172,7 +172,7 @@ public class Ntxuva {
                             newBoard[current.row][current.column] = 0;
                         }
 
-                        current.moveForward();
+                        current.moveAntiClockWise();
 
                         newBoard[current.row][current.column] = newBoard[current.row][current.column] + 1;
                         tempStones--;
@@ -182,7 +182,7 @@ public class Ntxuva {
 
                 if (newBoard[start.row][start.column] > 0) {
 
-                    Position next = new Position(start.row, start.column).moveForward();
+                    Position next = new Position(start.row, start.column).moveAntiClockWise();
                     if (newBoard[next.row][next.column] == 0) {
 
                         if (tempStones == 0 && newBoard[current.row][current.column] > 0) {
@@ -190,7 +190,7 @@ public class Ntxuva {
                             newBoard[current.row][current.column] = 0;
                         }
 
-                        current.moveForward();
+                        current.moveAntiClockWise();
 
                         newBoard[current.row][current.column] = newBoard[current.row][current.column] + 1;
                         tempStones--;
