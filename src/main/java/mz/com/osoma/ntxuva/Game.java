@@ -25,6 +25,7 @@ public class Game {
 
     public Ntxuva ntxuva = new Ntxuva();
     
+    
 //        public Ntxuva ntxuva = new Ntxuva(new int[][]{
 //            {1,2,1,0,1,4,3,1},
 //            {10,0,3,0,1,0,1,0},
@@ -92,15 +93,15 @@ public class Game {
 
                         String[] split = comando.split("_");
 
-                        System.out.println("X play " + new Position(Integer.parseInt(split[1]), Integer.parseInt(split[2])));
+//                        System.out.println("X play " + new Position(Integer.parseInt(split[1]), Integer.parseInt(split[2])));
 
                         Position posClick = new Position(Integer.parseInt(split[1]), Integer.parseInt(split[2]));
 
 //                        if (game.ntxuva.board[posClick.row][posClick.column] > 0) {
 
-                        System.out.println("before turn "+game.ntxuva.turn);
+//                        System.out.println("before turn "+game.ntxuva.turn);
                         game.ntxuva = game.ntxuva.move(new Position(Integer.parseInt(split[1]), Integer.parseInt(split[2])));
-                        System.out.println("after turn "+game.ntxuva.turn);
+////                        System.out.println("after turn "+game.ntxuva.turn);
                         
                         updateBoard(game.ntxuva);
 
@@ -108,11 +109,11 @@ public class Game {
                             // find the best move
                             // move the mest move
 
-                            System.out.println("entrei");
+//                            System.out.println("entrei");
                             
                             
                             Position bestMove = new MiniMax().decisao_minimax(game.ntxuva);
-                            System.out.println("best: "+bestMove);
+//                            System.out.println("best: "+bestMove);
 //                            JOptionPane.showMessageDialog(null, bestMove.toString());
                             game.ntxuva = game.ntxuva.move(bestMove);
                             updateBoard(game.ntxuva);

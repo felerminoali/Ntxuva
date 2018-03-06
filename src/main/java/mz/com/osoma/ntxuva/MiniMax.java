@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class MiniMax {
 
     static ArrayList<Sucessor> sucessores = new ArrayList<>();
-    int maxProf = 3;
+    int maxProf = 4;
 
     public MiniMax() {
     }
@@ -170,8 +170,14 @@ public class MiniMax {
 
                         if (!mayerTest(ntxuva, turn)) {
                             Position p = new Position(i, j);
+                            
+                            System.out.println(ntxuva);
+                            System.out.println("P: "+p);
                             Ntxuva move = ntxuva.move(p);
+                            
                             suc.add(new Sucessor(move, p));
+                        } else {
+                            System.out.println(ntxuva);
                         }
 
                     }
@@ -186,8 +192,12 @@ public class MiniMax {
                         if (ntxuva.board[next.row][next.column] == 0) {
                             if (!mayerTest(ntxuva, turn)) {
                                 Position p = new Position(i, j);
+                                System.out.println(ntxuva);
                                 Ntxuva move = ntxuva.move(p);
+                                System.out.println("P: "+p);
                                 suc.add(new Sucessor(move, p));
+                            } else {
+                                System.out.println(ntxuva);
                             }
                         }
                     }
@@ -213,7 +223,7 @@ public class MiniMax {
 
         boolean result = true;
         for (int i = startRow; i < finishRow; i++) {
-            for (int j = 0; j < Ntxuva.COLUMNS; j++) { 
+            for (int j = 0; j < Ntxuva.COLUMNS; j++) {
 
                 int seedsInHole = ntxuva.board[i][j];
                 Position p = new Position(i, j);
@@ -224,7 +234,9 @@ public class MiniMax {
                  */
 //                System.out.println(seedsInHole + "!=" + (p.getPositionId() + 1));
                 result = result && (seedsInHole != (p.getPositionId() + 1));
-                if(!result) return result;
+                if (!result) {
+                    return result;
+                }
             }
         }
 
@@ -236,7 +248,7 @@ public class MiniMax {
         int startRow = (turn == 'x') ? Ntxuva.ROW_ZERO : Ntxuva.ROW_TWO;
         int finishRow = (turn == 'x') ? Ntxuva.ROW_TWO : Ntxuva.ROWS;
 
-        System.out.println("");
+//        System.out.println("");
         boolean result = true;
         for (int i = startRow; i < finishRow; i++) {
             for (int j = 0; j < Ntxuva.COLUMNS; j++) {
@@ -250,7 +262,9 @@ public class MiniMax {
                  */
 //                System.out.println(seedsInHole + "!=" + (p.getPositionId() - 1));
                 result = result && (seedsInHole != (p.getPositionId() - 1));
-                if(!result) return result;
+                if (!result) {
+                    return result;
+                }
             }
         }
 
@@ -278,7 +292,9 @@ public class MiniMax {
 
 //                    System.out.println("i: " + i + " j: " + j + " => " + seedsPosK + "!=" + ((seedsPosI) + j + 1));
                     result = result && (seedsPosK != ((seedsPosI) + j + 1));
-                    if(!result) return result;
+                    if (!result) {
+                        return result;
+                    }
                 }
 
             }
@@ -308,7 +324,9 @@ public class MiniMax {
 
 //                    System.out.println("i: " + i + " j: " + j + " => " + seedsPosK + "!=" + ((seedsPosI) + j - 1));
                     result = result && (seedsPosK != ((seedsPosI) + j - 1));
-                    if(!result) return result;
+                    if (!result) {
+                        return result;
+                    }
                 }
 
             }

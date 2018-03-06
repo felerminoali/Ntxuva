@@ -216,4 +216,19 @@ public class NtxuvaTest {
 //        Ntxuva ntxuva = new Ntxuva(b,'x');
 //        assertTrue(new MiniMax().isMayerTestD(ntxuva, 'x'));
 //    }
+    
+    @Test
+    public void testMiniMaxDecision() {
+
+        String[] s = {"012104", "102141", "116221", "021220"};
+        
+        Ntxuva ntxuva = new Ntxuva(s, 'x');
+//        assertTrue(new MiniMax().mayerTest(ntxuva, 'o'));
+
+        assertTrue(new MiniMax().isMayerTestA(ntxuva, 'x'));
+//        assertTrue(new MiniMax().isMayerTestB(ntxuva, 'x'));
+//        assertTrue(new MiniMax().isMayerTestC(ntxuva, 'x'));
+//          assertTrue(new MiniMax().isMayerTestD(ntxuva, 'x'));
+    
+    }
 }
