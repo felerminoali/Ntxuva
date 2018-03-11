@@ -11,7 +11,7 @@ package mz.com.osoma.ntxuva;
  */
 public class Ntxuva {
 
-    static final int COLUMNS = 6;
+    static final int COLUMNS = 8;
     static final int ROWS = 4;
     static final int ROW_ZERO = 0;
     static final int ROW_ONE = 1;
@@ -77,10 +77,10 @@ public class Ntxuva {
     }
 
     Ntxuva(Ntxuva ntxuva) {
-        
+
         this.board = ntxuva.board;
         this.turn = ntxuva.turn;
-      
+
     }
 
     public final void reset(int pieces) {
@@ -109,7 +109,7 @@ public class Ntxuva {
 
         int startRow = (pTurn == 'x') ? ROW_ZERO : ROW_TWO;
         int finishRow = (pTurn == 'x') ? ROW_TWO : ROWS;
-         
+
         for (int i = startRow; i < finishRow; i++) {
             for (int j = 0; j < COLUMNS; j++) {
                 if (board[i][j] > 1) {
@@ -142,7 +142,6 @@ public class Ntxuva {
 
         Position current = new Position(start.row, start.column);
 
-        
         int[][] newBoard = new int[ROWS][COLUMNS];
         for (int i = 0; i < ROWS; i++) {
             System.arraycopy(board[i], 0, newBoard[i], 0, COLUMNS);
@@ -153,7 +152,6 @@ public class Ntxuva {
             int tempStones = 0;
 
             if (moreThanOnePiece(start, newBoard)) {
-
 
                 if (newBoard[start.row][start.column] > 1) {
 
@@ -213,6 +211,95 @@ public class Ntxuva {
 
     }
 
+    public boolean isInfitMove(Position start) {
+
+        Position current = new Position(start.row, start.column);
+
+        int[][] newBoard = new int[ROWS][COLUMNS];
+        int[][] tempBoard = new int[ROWS][COLUMNS];
+        for (int i = 0; i < ROWS; i++) {
+            System.arraycopy(board[i], 0, newBoard[i], 0, COLUMNS);
+            System.arraycopy(board[i], 0, tempBoard[i], 0, COLUMNS);
+        }
+
+        if (newBoard[current.row][current.column] > 0) {
+
+            int tempStones = 0;
+
+            if (moreThanOnePiece(start, newBoard)) {
+
+                if (newBoard[start.row][start.column] > 1) {
+
+                    while (true) {
+                        
+//                        System.out.println("entrei");
+                        if (tempStones == 0 && newBoard[current.row][current.column] == 1) {
+
+                            if (current.isAttackingPosition()) {
+                                score(current, newBoard);
+                            }
+
+                            return false;
+                        }
+
+                        if (tempStones == 0 && newBoard[current.row][current.column] > 0) {
+                            tempStones = newBoard[current.row][current.column];
+                            newBoard[current.row][current.column] = 0;
+                        }
+
+                        current.moveAntiClockWise();
+
+                        newBoard[current.row][current.column] = newBoard[current.row][current.column] + 1;
+                        tempStones--;
+                        
+                          boolean rsub = true;
+                            int startRow = (!current.isOpponetSide()) ? ROW_ZERO : ROW_TWO;
+                            int finishRow = (!current.isOpponetSide()) ? ROW_TWO : ROWS;
+                            for (int i = startRow; i < finishRow; i++) {
+                                for (int j = 0; (j < COLUMNS) && (rsub); j++) {
+                                    rsub = rsub && (tempBoard[i][j] == newBoard[i][j]);
+                                }
+                            }
+                            
+//                            System.out.println(rsub);
+//                            System.out.println(new Ntxuva(newBoard,this.turn));
+                            if(rsub) return rsub;
+                    }
+                }
+            } else {
+
+                if (newBoard[start.row][start.column] > 0) {
+
+                    Position next = new Position(start.row, start.column).moveAntiClockWise();
+                    if (newBoard[next.row][next.column] == 0) {
+
+                        if (tempStones == 0 && newBoard[current.row][current.column] > 0) {
+                            tempStones = newBoard[current.row][current.column];
+                            newBoard[current.row][current.column] = 0;
+                        }
+
+                        current.moveAntiClockWise();
+
+                        newBoard[current.row][current.column] = newBoard[current.row][current.column] + 1;
+                        tempStones--;
+
+                        if (tempStones == 0 && newBoard[current.row][current.column] == 1) {
+
+                            if (current.isAttackingPosition()) {
+                                score(current, newBoard);
+                            }
+
+                        }
+                    }
+                }
+
+            }
+        }
+
+        return false;
+
+    }
+
     public int score(Position current, int[][] newBoard) {
 
         int totalScore = 0;
@@ -246,7 +333,6 @@ public class Ntxuva {
 
     public boolean win(char pTurn) {
 
-        
 //        if (sumPieces('x') == 1) {
 //            
 //            if(sumPieces('o') == 1){
@@ -271,7 +357,6 @@ public class Ntxuva {
 //            }
 //        }
 //        }
-
         int startRow = (pTurn == 'x') ? ROW_TWO : ROW_ZERO;
         int finishRow = (pTurn == 'x') ? ROWS : ROW_TWO;
         for (int i = startRow; i < finishRow; i++) {
@@ -306,7 +391,7 @@ public class Ntxuva {
 
         int startRow = (pTurn == 'x') ? ROW_ZERO : ROW_TWO;
         int finishRow = (pTurn == 'x') ? ROW_TWO : ROWS;
-        
+
         int sum = 0;
         for (int i = startRow; i < finishRow; i++) {
             for (int j = 0; j < COLUMNS; j++) {
@@ -326,7 +411,7 @@ public class Ntxuva {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
-        
+
         str.append("Turn: ").append(turn).append("\n");
         for (int[] board1 : board) {
             for (int j = 0; j < board1.length; j++) {

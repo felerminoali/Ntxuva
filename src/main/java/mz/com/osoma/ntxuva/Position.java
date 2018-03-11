@@ -105,7 +105,7 @@ public class Position {
 
             this.column = Ntxuva.COLUMNS - 1;
         }
-
+        
         return this;
     }
 

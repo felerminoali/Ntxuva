@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class MiniMax {
 
     static ArrayList<Sucessor> sucessores = new ArrayList<>();
-    int maxProf = 4;
+    int maxProf = 5;
 
     public MiniMax() {
     }
@@ -168,16 +168,21 @@ public class MiniMax {
                 for (int j = 0; j < Ntxuva.COLUMNS; j++) {
                     if (ntxuva.board[i][j] > 1) {
 
-                        if (!mayerTest(ntxuva, turn)) {
+//                        if (!mayerTest(ntxuva, turn)) {
+                        if (!ntxuva.isInfitMove(new Position(i, j))) {
                             Position p = new Position(i, j);
-                            
-                            System.out.println(ntxuva);
-                            System.out.println("P: "+p);
+
+//                            System.out.println(ntxuva);
+//                            System.out.println("P: " + p);
                             Ntxuva move = ntxuva.move(p);
-                            
+
                             suc.add(new Sucessor(move, p));
-                        } else {
+                        } 
+else {
+                            System.out.println("=========Cyclte ========");
                             System.out.println(ntxuva);
+                            System.out.println("P: " + new Position(i, j));
+                            System.out.println("=================");
                         }
 
                     }
@@ -190,15 +195,20 @@ public class MiniMax {
 
                         Position next = new Position(i, j).moveAntiClockWise();
                         if (ntxuva.board[next.row][next.column] == 0) {
-                            if (!mayerTest(ntxuva, turn)) {
+//                            if (!mayerTest(ntxuva, turn)) {
+//                            if (!ntxuva.isInfitMove(new Position(i, j))) {
                                 Position p = new Position(i, j);
                                 System.out.println(ntxuva);
+                                System.out.println("P: " + p);
                                 Ntxuva move = ntxuva.move(p);
-                                System.out.println("P: "+p);
+                                
                                 suc.add(new Sucessor(move, p));
-                            } else {
-                                System.out.println(ntxuva);
-                            }
+//                            } else {
+//                                System.out.println("=========Cyclte ========");
+//                                System.out.println(ntxuva);
+//                                System.out.println("P: " + new Position(i, j));
+//                                System.out.println("=================");
+//                            }
                         }
                     }
                 }
@@ -209,10 +219,13 @@ public class MiniMax {
 
     public boolean mayerTest(Ntxuva ntxuva, char turn) {
 
-        return isMayerTestA(ntxuva, turn)
-                && isMayerTestB(ntxuva, turn)
-                && isMayerTestC(ntxuva, turn)
-                && isMayerTestD(ntxuva, turn);
+//        boolean resultA = isMayerTestA(ntxuva, turn) || (!isMayerTestB(ntxuva, turn) || !isMayerTestC(ntxuva, turn) || !isMayerTestD(ntxuva, turn));
+//        boolean resultB = isMayerTestB(ntxuva, turn) || (!isMayerTestA(ntxuva, turn) || !isMayerTestD(ntxuva, turn));
+//        boolean resultC = isMayerTestC(ntxuva, turn) || (!isMayerTestA(ntxuva, turn) || !isMayerTestB(ntxuva, turn) || !isMayerTestD(ntxuva, turn));
+//        boolean resultD = isMayerTestD(ntxuva, turn) || (!isMayerTestA(ntxuva, turn) || !isMayerTestB(ntxuva, turn) || !isMayerTestC(ntxuva, turn));
+//
+//        return resultA && resultB && resultC && resultD;
+        return false;
 
     }
 
@@ -235,7 +248,8 @@ public class MiniMax {
 //                System.out.println(seedsInHole + "!=" + (p.getPositionId() + 1));
                 result = result && (seedsInHole != (p.getPositionId() + 1));
                 if (!result) {
-                    return result;
+//                     System.out.println("i: "+i+" j:"+j);
+//                    return result;
                 }
             }
         }
@@ -263,7 +277,8 @@ public class MiniMax {
 //                System.out.println(seedsInHole + "!=" + (p.getPositionId() - 1));
                 result = result && (seedsInHole != (p.getPositionId() - 1));
                 if (!result) {
-                    return result;
+//                    System.out.println("i: "+i+" j:"+j);
+//                    return result;
                 }
             }
         }
@@ -293,7 +308,8 @@ public class MiniMax {
 //                    System.out.println("i: " + i + " j: " + j + " => " + seedsPosK + "!=" + ((seedsPosI) + j + 1));
                     result = result && (seedsPosK != ((seedsPosI) + j + 1));
                     if (!result) {
-                        return result;
+//                        System.out.println("i: "+i+" j:"+j);
+//                        return result;
                     }
                 }
 
@@ -325,7 +341,8 @@ public class MiniMax {
 //                    System.out.println("i: " + i + " j: " + j + " => " + seedsPosK + "!=" + ((seedsPosI) + j - 1));
                     result = result && (seedsPosK != ((seedsPosI) + j - 1));
                     if (!result) {
-                        return result;
+//                        System.out.println("i: "+i+" j:"+j);
+//                        return result;
                     }
                 }
 

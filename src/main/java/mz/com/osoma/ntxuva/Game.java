@@ -115,7 +115,13 @@ public class Game {
                             Position bestMove = new MiniMax().decisao_minimax(game.ntxuva);
 //                            System.out.println("best: "+bestMove);
 //                            JOptionPane.showMessageDialog(null, bestMove.toString());
-                            game.ntxuva = game.ntxuva.move(bestMove);
+
+                            try {
+                                game.ntxuva = game.ntxuva.move(bestMove);
+                            } catch (Exception ex) {
+                                JOptionPane.showMessageDialog(null, ex);
+                            }
+                            
                             updateBoard(game.ntxuva);
                         }
 //                        }

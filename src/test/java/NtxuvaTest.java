@@ -78,15 +78,38 @@ public class NtxuvaTest {
 //
 //    }
 //
-//    @Test
-//    public void testMoveOnOSide() {
-//
+    @Test
+    public void testMoveOnOSide() {
+
 //        Ntxuva ntxuva = new Ntxuva();
 //        ntxuva = ntxuva.move(new Position(1, 0)).move(new Position(2, 0));
 //        String out = "Turn: x\n";
 //        out += "0 3 3 0 3 3 \n1 4 1 3 3 0 \n1 0 1 3 0 3 \n4 1 1 3 0 3 \n";
 //        assertEquals(out, ntxuva.toString());
+        
+        String[] s = {"103303", "413303", "202222", "202222"};
+         Ntxuva ntxuva = new Ntxuva(s, 'o');
+         
+//         ntxuva.move(new Position(2,0));
+//         ntxuva.move(new Position(2,2));
+//         ntxuva.move(new Position(2,3));
+//         ntxuva.move(new Position(2,4));
+//         ntxuva.move(new Position(2,5));
+//         ntxuva.move(new Position(3,0));
+//         ntxuva.move(new Position(3,2));
+//         ntxuva.move(new Position(3,3));
+//         ntxuva.move(new Position(3,4));
+//         ntxuva.move(new Position(3,5));
+         
+    }
+    
+//    @Test
+//    public void testMoveXnOSide() {
+//        String[] s = {"121216", "021032", "001103", "214413"};
+//        Ntxuva ntxuva = new Ntxuva(s, 'x');
+//
 //    }
+
 //
 //    @Test
 //    public void testWin() {
@@ -130,12 +153,14 @@ public class NtxuvaTest {
 //        assertEquals("[2, 2]", p.toString());
 //
 //    }
-//    @Test
-//    public void testMoveAntiClockWise() {
+    @Test
+    public void testMoveAntiClockWise() {
 //
 //        assertEquals("[1, 0]", new Position(0, 0).moveAntiClockWise().toString());
 //        assertEquals("[0, 5]", new Position(1, 5).moveAntiClockWise().toString());
-//    }
+
+
+    }
 //    
 //    @Test
 //    public void testMoveClockWise() {
@@ -220,15 +245,34 @@ public class NtxuvaTest {
     @Test
     public void testMiniMaxDecision() {
 
-        String[] s = {"012104", "102141", "116221", "021220"};
-        
+////        String[] s = {"012104", "102141", "116221", "021220"};
+//        String[] s = {"121216", "021032", "001103", "214413"};
+//         String[] s = {"010102", "010102", "210114", "120121"};
+//         String[] s = {"121023", "321201", "010014", "604011"};
+         String[] s = {"041421", "121030", "201021", "051141"};
+         
         Ntxuva ntxuva = new Ntxuva(s, 'x');
 //        assertTrue(new MiniMax().mayerTest(ntxuva, 'o'));
 
-        assertTrue(new MiniMax().isMayerTestA(ntxuva, 'x'));
+//        assertTrue(new MiniMax().isMayerTestA(ntxuva, 'x'));
 //        assertTrue(new MiniMax().isMayerTestB(ntxuva, 'x'));
 //        assertTrue(new MiniMax().isMayerTestC(ntxuva, 'x'));
 //          assertTrue(new MiniMax().isMayerTestD(ntxuva, 'x'));
     
+    }
+    
+    @Test
+    public void testInifinitMove(){
+         String[] s = {"014103", 
+                       "101330", 
+                       "222220", 
+                       "222011"};
+         
+        Ntxuva ntxuva = new Ntxuva(s, 'x');
+//        
+//        ntxuva.move(new Position(1,3));
+        
+        assertTrue(ntxuva.isInfitMove(new Position(1,3)));
+        
     }
 }
