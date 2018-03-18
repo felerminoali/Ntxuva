@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class MiniMax {
 
     static ArrayList<Sucessor> sucessores = new ArrayList<>();
-    int maxProf = 5;
+    int maxProf = 8;
 
     public MiniMax() {
     }
@@ -174,15 +174,17 @@ public class MiniMax {
 
 //                            System.out.println(ntxuva);
 //                            System.out.println("P: " + p);
+// this.makeDataset(ntxuva, p, "no");
                             Ntxuva move = ntxuva.move(p);
 
                             suc.add(new Sucessor(move, p));
-                        } 
-else {
+                        } else {
                             System.out.println("=========Cyclte ========");
                             System.out.println(ntxuva);
                             System.out.println("P: " + new Position(i, j));
                             System.out.println("=================");
+
+//                            this.makeDataset(ntxuva, new Position(i, j), "yes");
                         }
 
                     }
@@ -197,12 +199,12 @@ else {
                         if (ntxuva.board[next.row][next.column] == 0) {
 //                            if (!mayerTest(ntxuva, turn)) {
 //                            if (!ntxuva.isInfitMove(new Position(i, j))) {
-                                Position p = new Position(i, j);
-                                System.out.println(ntxuva);
-                                System.out.println("P: " + p);
-                                Ntxuva move = ntxuva.move(p);
-                                
-                                suc.add(new Sucessor(move, p));
+                            Position p = new Position(i, j);
+//                                System.out.println(ntxuva);
+//                                System.out.println("P: " + p);
+                            Ntxuva move = ntxuva.move(p);
+
+                            suc.add(new Sucessor(move, p));
 //                            } else {
 //                                System.out.println("=========Cyclte ========");
 //                                System.out.println(ntxuva);
@@ -350,5 +352,43 @@ else {
         }
 
         return result;
+    }
+
+    public void makeDataset(Ntxuva cycle, Position position, String classe) {
+
+        int startRow = (!position.isOpponetSide()) ? Ntxuva.ROW_ZERO : Ntxuva.ROW_TWO;
+        int finishRow = (!position.isOpponetSide()) ? Ntxuva.ROW_TWO : Ntxuva.ROWS;
+
+        System.out.println("i, y(i), i+1, i-1, j, y(i+j), y(i)+j+1, y(i)+j-1");
+
+        for (int i = startRow; i < finishRow; i++) {
+            for (int j = 0; j < Ntxuva.COLUMNS; j++) {
+                String out = "";
+                int idI = new Position(i, j).getPositionId();
+                out += idI + ", ";
+                out += cycle.board[i][j] + ", ";
+                out += (idI + 1) + ", ";
+                out += (idI - 1) + ", ";
+
+                for (int k = startRow; k < finishRow; k++) {
+                    for (int m = 0; m < Ntxuva.COLUMNS; m++) {
+                        int idj = new Position(k, m).getPositionId();
+                        System.out.print(out + idj + ", ");
+                        char turn = (position.isOpponetSide()) ? 'o' : 'x';
+                        Position p = new Position().getPositonById((idI + idj), turn);
+                        System.out.print(cycle.board[p.getRow()][p.getColumn()] + ", ");
+                        System.out.print((cycle.board[i][j] + idj + 1) + ", ");
+                        System.out.print((cycle.board[i][j] + idj - 1) + ", ");
+                        System.out.print(classe);
+                        System.out.println("");
+                    }
+
+                }
+
+//                System.out.println("");
+            }
+
+        }
+
     }
 }

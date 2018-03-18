@@ -4,11 +4,9 @@
  * and open the template in the editor.
  */
 
-import java.util.ArrayList;
 import mz.com.osoma.ntxuva.MiniMax;
 import mz.com.osoma.ntxuva.Ntxuva;
 import mz.com.osoma.ntxuva.Position;
-import mz.com.osoma.ntxuva.Sucessor;
 import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -87,8 +85,8 @@ public class NtxuvaTest {
 //        out += "0 3 3 0 3 3 \n1 4 1 3 3 0 \n1 0 1 3 0 3 \n4 1 1 3 0 3 \n";
 //        assertEquals(out, ntxuva.toString());
         
-        String[] s = {"103303", "413303", "202222", "202222"};
-         Ntxuva ntxuva = new Ntxuva(s, 'o');
+//        String[] s = {"103303", "413303", "202222", "202222"};
+//         Ntxuva ntxuva = new Ntxuva(s, 'o');
          
 //         ntxuva.move(new Position(2,0));
 //         ntxuva.move(new Position(2,2));
@@ -251,7 +249,7 @@ public class NtxuvaTest {
 //         String[] s = {"121023", "321201", "010014", "604011"};
          String[] s = {"041421", "121030", "201021", "051141"};
          
-        Ntxuva ntxuva = new Ntxuva(s, 'x');
+//        Ntxuva ntxuva = new Ntxuva(s, 'x');
 //        assertTrue(new MiniMax().mayerTest(ntxuva, 'o'));
 
 //        assertTrue(new MiniMax().isMayerTestA(ntxuva, 'x'));
@@ -263,16 +261,27 @@ public class NtxuvaTest {
     
     @Test
     public void testInifinitMove(){
-         String[] s = {"014103", 
-                       "101330", 
-                       "222220", 
-                       "222011"};
+//         String[] s = {"014103", 
+//                       "101330", 
+//                       "222220", 
+//                       "222011"};
          
-        Ntxuva ntxuva = new Ntxuva(s, 'x');
+//        Ntxuva ntxuva = new Ntxuva(s, 'x');
 //        
 //        ntxuva.move(new Position(1,3));
         
-        assertTrue(ntxuva.isInfitMove(new Position(1,3)));
+//        assertTrue(ntxuva.isInfitMove(new Position(1,3)));
         
     }
+    
+    @Test
+    public void testData(){
+    
+        String[] s = {"01012140", "30101243", "01120141", "21502401"};
+        Ntxuva ntxuva = new Ntxuva(s, 'x');
+        
+        Position p = new Position(1,7);
+        new MiniMax().makeDataset(ntxuva, p, "yes");
+    
+    } 
 }
