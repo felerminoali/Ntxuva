@@ -154,7 +154,7 @@ public class Ntxuva {
             if (moreThanOnePiece(start, newBoard)) {
 
                 if (newBoard[start.row][start.column] > 1) {
-
+                    int period = 0;
                     while (true) {
                         if (tempStones == 0 && newBoard[current.row][current.column] == 1) {
 
@@ -162,6 +162,7 @@ public class Ntxuva {
                                 score(current, newBoard);
                             }
 
+                            if(period>=271) System.out.println("this move took a period of: "+period);
                             return new Ntxuva(newBoard, changeTurn());
                         }
 
@@ -174,6 +175,7 @@ public class Ntxuva {
 
                         newBoard[current.row][current.column] = newBoard[current.row][current.column] + 1;
                         tempStones--;
+                        period++;
                     }
                 }
             } else {
@@ -229,7 +231,8 @@ public class Ntxuva {
             if (moreThanOnePiece(start, newBoard)) {
 
                 if (newBoard[start.row][start.column] > 1) {
-
+                    
+                    int period = 0;
                     while (true) {
                         
 //                        System.out.println("entrei");
@@ -263,7 +266,14 @@ public class Ntxuva {
                             
 //                            System.out.println(rsub);
 //                            System.out.println(new Ntxuva(newBoard,this.turn));
-                            if(rsub) return rsub;
+                            if(rsub) {
+                                System.out.println("cyclye period: "+period);
+                                return rsub;
+                            }
+                            
+                            // if period is more than 400 then it is infere that it is a cycle 
+                            if(period > 400) return true;
+                            period++;
                     }
                 }
             } else {

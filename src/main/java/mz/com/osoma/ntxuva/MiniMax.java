@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class MiniMax {
 
     static ArrayList<Sucessor> sucessores = new ArrayList<>();
-    int maxProf = 8;
+    int maxProf = 12;
 
     public MiniMax() {
     }
