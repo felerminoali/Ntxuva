@@ -213,7 +213,7 @@ public class Ntxuva {
 
     }
 
-    public boolean isInfitMove(Position start) {
+    public boolean isNeverEndingMove(Position start) {
 
         Position current = new Position(start.row, start.column);
 
@@ -271,8 +271,6 @@ public class Ntxuva {
                                 return rsub;
                             }
                             
-                            // if period is more than 400 then it is infere that it is a cycle 
-                            if(period > 400) return true;
                             period++;
                     }
                 }

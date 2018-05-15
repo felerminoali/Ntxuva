@@ -169,7 +169,7 @@ public class MiniMax {
                     if (ntxuva.board[i][j] > 1) {
 
 //                        if (!mayerTest(ntxuva, turn)) {
-                        if (!ntxuva.isInfitMove(new Position(i, j))) {
+                        if (!ntxuva.isNeverEndingMove(new Position(i, j))) {
                             Position p = new Position(i, j);
 
 //                            System.out.println(ntxuva);
