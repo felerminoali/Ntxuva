@@ -259,29 +259,40 @@ public class NtxuvaTest {
     
     }
     
-    @Test
-    public void testInifinitMove(){
-//         String[] s = {"014103", 
-//                       "101330", 
-//                       "222220", 
-//                       "222011"};
-         
+
+    
+//    @Test
+//    public void testData(){
+//    
+//        String[] s = {"01012140", "30101243", "01120141", "21502401"};
 //        Ntxuva ntxuva = new Ntxuva(s, 'x');
 //        
-//        ntxuva.move(new Position(1,3));
-        
-//        assertTrue(ntxuva.isInfitMove(new Position(1,3)));
-        
-    }
+//        Position p = new Position(1,7);
+//        new MiniMax().makeDataset(ntxuva, p, "yes");
+//    
+//    } 
     
     @Test
-    public void testData(){
+    public void testNeverEndingMove(){
     
-        String[] s = {"01012140", "30101243", "01120141", "21502401"};
-        Ntxuva ntxuva = new Ntxuva(s, 'x');
+//        String[] s = {"23010121", "02101212", "20101102", "70104110"};
+//        Ntxuva ntxuva = new Ntxuva(s, 'x');
+//        
+//        assertTrue(ntxuva.isNeverEndingMove(new Position(0,0)));
+    }
+    @Test
+    public void testMovingClockWise(){
+         String[] s = {"23010121", "02101212", "20101102", "70104110"};
+        Ntxuva ntxuva = new Ntxuva(s, 'o');
         
-        Position p = new Position(1,7);
-        new MiniMax().makeDataset(ntxuva, p, "yes");
+        System.out.println(ntxuva);
+        Position p = new Position(2,0);
+        
+        do
+        {
+            p.moveAntiClockWise();
+            System.out.println(p);
+        }while(!p.equals(new Position(2,0)));
+    }
     
-    } 
 }

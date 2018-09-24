@@ -162,7 +162,9 @@ public class Ntxuva {
                                 score(current, newBoard);
                             }
 
-                            if(period>=271) System.out.println("this move took a period of: "+period);
+                            if (period >= 271) {
+                                System.out.println("this move took a period of: " + period);
+                            }
                             return new Ntxuva(newBoard, changeTurn());
                         }
 
@@ -231,10 +233,10 @@ public class Ntxuva {
             if (moreThanOnePiece(start, newBoard)) {
 
                 if (newBoard[start.row][start.column] > 1) {
-                    
+
                     int period = 0;
                     while (true) {
-                        
+
 //                        System.out.println("entrei");
                         if (tempStones == 0 && newBoard[current.row][current.column] == 1) {
 
@@ -254,24 +256,48 @@ public class Ntxuva {
 
                         newBoard[current.row][current.column] = newBoard[current.row][current.column] + 1;
                         tempStones--;
-                        
-                          boolean rsub = true;
-                            int startRow = (!current.isOpponetSide()) ? ROW_ZERO : ROW_TWO;
-                            int finishRow = (!current.isOpponetSide()) ? ROW_TWO : ROWS;
-                            for (int i = startRow; i < finishRow; i++) {
-                                for (int j = 0; (j < COLUMNS) && (rsub); j++) {
-                                    rsub = rsub && (tempBoard[i][j] == newBoard[i][j]);
-                                }
-                            }
-                            
-//                            System.out.println(rsub);
-//                            System.out.println(new Ntxuva(newBoard,this.turn));
-                            if(rsub) {
-                                System.out.println("cyclye period: "+period);
-                                return rsub;
-                            }
-                            
-                            period++;
+
+                        boolean rsub = true;
+//                        int startRow = (!current.isOpponetSide()) ? ROW_ZERO : ROW_TWO;
+//                        int finishRow = (!current.isOpponetSide()) ? ROW_TWO : ROWS;
+//                        for (int i = startRow; i < finishRow; i++) {
+//                            for (int j = 0; (j < COLUMNS) && (rsub); j++) {
+//                                rsub = rsub && (tempBoard[i][j] == newBoard[i][j]);
+//                            }
+//                        }
+
+                        Position pNewBoard = new Position(current.row, current.column);
+                        Position pTempBoard = new Position(start.row, start.column);
+
+                        do {
+                            pNewBoard.moveAntiClockWise();
+                            pTempBoard.moveAntiClockWise();
+                            rsub = rsub && (tempBoard[pTempBoard.row][pTempBoard.column] == newBoard[pNewBoard.row][pNewBoard.column]);
+                        } while (!pNewBoard.equals(new Position(current.row, current.column)));
+//
+                        if (rsub) {
+                            System.out.println("cyclye period: " + period);
+//                            System.out.println("---------Board");
+//                            System.out.println("Never ending position: " + start);
+//                            System.out.println(this);
+//                            System.out.println("-----------------");
+//
+//                            System.out.println("*************************");
+//                            StringBuilder str = new StringBuilder();
+//
+//                            str.append("Turn: ").append(turn).append("\n");
+//                            for (int[] board1 : newBoard) {
+//                                for (int j = 0; j < board1.length; j++) {
+//                                    str.append(board1[j]).append(" ");
+//                                }
+//                                str.append("\n");
+//                            }
+//                            System.out.println(str.toString());
+//                            System.out.println("*************************");
+                            return rsub;
+                        }
+
+                        period++;
                     }
                 }
             } else {
